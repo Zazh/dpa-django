@@ -2,3 +2,4 @@
 /media
 /staticfiles
 /.venv
+/node_modules
