@@ -132,11 +132,12 @@
 </div>
 <div class="accordion max-w-screen-lg [  mt-12 mb-8 ]" data-acc-group data-acc-single="true">
     {% for it in page.program_items.all %}
-    <div class="item">
-        <div class="item-header [ md:py-6 py-4 md:px-8 px-6 ] [ acc-trigger ]"
-                    id="acc-{{ it.anchor_id }}"
-                    aria-expanded="false"
-                    aria-controls="panel-{{ it.anchor_id }}">
+    {% with pid=it.anchor_id|default:forloop.counter %}
+    <div class="item{% if forloop.first %} active{% endif %}">
+        <div class="item-header [ md:py-6 py-4 md:px-8 px-6 ] acc-trigger"
+                 id="acc-{{ pid }}"
+                 aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                 aria-controls="panel-{{ pid }}">
             <div class="flex flex-wrap flex-col md:flex-row gap-2 md:gap-12 md:items-center">
                 <h1 class="item-header__title text-2xl">{{ it.title }}</h1>
                 <span class="flex gap-2 items-center">
@@ -158,7 +159,8 @@
                 </span>
             </div>
         </div>
-        <div class="item-body [ md:pb-6 pb-4 md:px-8 px-6 ]" id="panel-1" role="region" aria-labelledby="acc-{{ it.anchor_id }}">
+        <div class="item-body [ md:pb-6 pb-4 md:px-8 px-6 ]" id="panel-{{ pid }}" role="region" aria-labelledby="acc-{{ pid }}"
+        {% if not forloop.first %}hidden aria-hidden="true"{% else %}aria-hidden="false"{% endif %}>
             <div class="pb-4">
                 {% if it.subtitle %}
                 <h2 class="font-bold text-lg">{{ it.subtitle }}</h2>
@@ -194,6 +196,7 @@
             </div>
         </div>
     </div>
+    {% endwith %}
     {% endfor %}
 </div>
 <div class="text-center pb-6">
