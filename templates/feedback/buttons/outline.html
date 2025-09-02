@@ -1,0 +1,7 @@
+<button class="modal-btn btn-gradient-border"data-title="{{ modal_title|escape }}"
+        data-action="{% if action %}{{ action.slug }}{% endif %}"
+        data-submit="{{ submit_label|escape }}"
+        data-name-label="{{ name_label|escape }}"
+        data-phone-label="{{ phone_label|escape }}">
+    <span class="bg-black text-gray-300 hover:text-white"> {{ label }}</span>
+</button>

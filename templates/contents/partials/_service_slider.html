@@ -1,0 +1,38 @@
+{% load static %}
+
+{% with slides=slides|default:page.slides.all %}
+<div class="flex justify-center mt-12 relative z-50">
+  {% if slides and slides.0 %}
+    {% with first=slides.0 %}
+    <div data-slider
+         data-images='[{% for s in slides %}{"src":"{{ s.image.url }}","alt":"{{ s.alt|default:""|escapejs }}"}{% if not forloop.last %}, {% endif %}{% endfor %}]'
+         class="group relative flex justify-center items-center xl:rounded-3xl overflow-hidden object-cover [ max-w-screen-lg w-full aspect-[16/9] bg-gray-50 m-auto ]"
+         role="region" aria-label="Галерея слайдов" tabindex="0">
+
+      <img data-slider-img
+           src="{{ first.image.url }}"
+           alt="{{ first.alt }}"
+           class="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-300"
+           loading="lazy" decoding="async" draggable="false">
+
+      <!-- Prev -->
+      <button type="button" data-slider-prev aria-label="Preview"
+              class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 size-10 md:size-12 grid place-items-center rounded-full bg-white/70 hover:bg-white shadow active:scale-95 focus:outline-none">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+
+      <!-- Next -->
+      <button type="button" data-slider-next aria-label="Next"
+              class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 size-10 md:size-12 grid place-items-center rounded-full bg-white/70 hover:bg-white shadow active:scale-95 focus:outline-none">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    {% endwith %}
+
+    {% else %}
+    <div class="group relative xl:rounded-3xl [ max-w-screen-lg w-full aspect-[16/9] bg-gray-100 m-auto ] grid place-items-center text-gray-500">
+      Нет изображений
+    </div>
+  {% endif %}
+</div>
+{% endwith %}

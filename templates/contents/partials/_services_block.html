@@ -1,0 +1,45 @@
+{# templates/contents/partials/_services_block.html #}
+{% if pages %}
+
+
+    <div class="py-[2rem] slider-wrap">
+        <div id="card-cert-block"
+             class="w-full gap-6 flex overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar
+                    p-[3rem] [scroll-padding-left:1.5rem] lg:[scroll-padding-left:3rem] [scroll-padding-right:1.5rem]">
+            {% for p in pages %}
+            <a href="{{ p.get_absolute_url }}"
+               class="w-[24rem] md:w-[27rem] shadow-[0_18px_34px_0_rgba(99,99,99,0.04)]
+                      hover:shadow-[0_18px_24px_0_rgba(99,99,99,0.1)] hover:scale-105 transition-transform
+                      [ bg-white ] card-cert aspect-[16/14] rounded-[2rem] cursor-none flex-shrink-0 snap-start
+                      relative overflow-hidden transition-all duration-300">
+                <div class="p-8 flex flex-col h-full">
+                    <div class="flex gap-2">
+                        {% if p.card_icon_svg %} {{ p.card_icon_svg|safe }} {% endif %}
+                    </div>
+                    <div class="pt-[3rem]">
+                        <h1 class="heading-1 font-bold">{{ p.card_title_text }}</h1>
+                        {% if p.card_description_text %}
+                            <p class="heading-3 mt-4 text-gray-600 leading-tight">{{ p.card_description_text }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="mt-auto relative">
+                        {% if p.card_tags %}
+                        <ul class="flex gap-x-2 gap-y-4 w-[calc(100%-5rem)] flex-wrap-reverse">
+                            {% for tag in p.card_tags %}
+                                <li><span class="rounded-full border border-gray-300 text-gray-600 text-sm font-medium py-2 px-3">{{ tag }}</span></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <svg class="absolute -bottom-2 -right-2" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                            <path d="M36 18C36 27.9411 27.9411 36 18 36C8.05887 36 0 27.9411 0 18C0 8.05887 8.05887 0 18 0C27.9411 0 36 8.05887 36 18Z" fill="#1E1E1E"/>
+                            <path d="M17.25 9.75C17.25 9.33579 17.5858 9 18 9C18.4142 9 18.75 9.33579 18.75 9.75V26.25C18.75 26.6642 18.4142 27 18 27C17.5858 27 17.25 26.6642 17.25 26.25V9.75Z" fill="white"/>
+                            <path d="M9.75 18.75C9.33579 18.75 9 18.4142 9 18C9 17.5858 9.33579 17.25 9.75 17.25H26.25C26.6642 17.25 27 17.5858 27 18C27 18.4142 26.6642 18.75 26.25 18.75H9.75Z" fill="white"/>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        <div class="pointer-events-none fixed z-50 hidden drag-cursor"></div>
+    </div>
+{% endif %}

@@ -1,0 +1,542 @@
+<!doctype html>
+{% load i18n i18n_extras feedback_tags %}
+{% get_current_language as CUR_LANG %}
+{% load static %}
+<html lang="{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+  <title>
+    {% block title %} тест {% endblock %}
+  </title>
+  <meta name="description" content="{{ page.meta_description }}">
+</head>
+<body>
+<main class="isolate relative">
+<!-- BEGIN NAV -->
+  <button id="openNav" aria-controls="offcanvasNav" aria-expanded="false" class="fixed left-5 top-5 z-50 mix-blend-difference py-2 js-open text-white transition" type="button" aria-label="Navigation">
+        <svg height="24" viewBox="0 0 48 22" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0H48V3H0V0Z" fill="currentColor"></path>
+            <path d="M0 19H48V22H0V19Z" fill="currentColor"></path>
+        </svg>
+    </button>
+<!-- END NAV -->
+
+<!-- BEGIN CTA_HEADER -->
+    <section class="flex justify-end items-center gap-2 relative [ {% block header_bg %} bg-black {% endblock %} ] ">
+        <!-- Языковой селектор -->
+        <div  style="z-index:999;" class="relative inline-block text-left z-50" data-lang-dropdown>
+        <button type="button" class="inline-flex items-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm font-medium shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500" data-lang-button aria-haspopup="menu" aria-expanded="false">
+            <!-- Глобус -->
+            <svg class="h-4 w-4 opacity-70" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 3a9 9 0 100 18 9 9 0 000-18Z" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <span data-lang-label>
+                {% if CUR_LANG == 'kk' %}Қазақша{% elif CUR_LANG == 'en' %}English{% else %}Русский{% endif %}
+            </span>
+            <svg class="h-4 w-4 opacity-60" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </button>
+
+        <div class=" bg-white invisible opacity-0 scale-95 absolute right-0 z-50 mt-2 w-44 origin-top-right rounded-xl border p-1 shadow-lg ring-1 ring-black/5 transition" role="menu" data-lang-menu aria-orientation="vertical" tabindex="-1">
+            <!-- RU -->
+            <form action="{% url 'set_language' %}" method="post" class="contents">
+                {% csrf_token %}
+                <input type="hidden" name="language" value="ru">
+                <input type="hidden" name="next" value="{{ request.get_full_path|translate_url:'ru' }}">
+                <button type="submit" role="menuitemradio" aria-checked="{% if CUR_LANG == 'ru' %}true{% else %}false{% endif %}" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm hover:bg-gray-100 focus:bg-gray-100 focus:outline-none {% if CUR_LANG == 'ru' %}bg-gray-100{% endif %}" data-lang-option="ru" tabindex="-1">
+                    <span>🇷🇺</span><span data-name>Русский</span>
+                    <span class="ml-auto opacity-60 {% if CUR_LANG != 'ru' %}hidden{% endif %}" data-check>✓</span>
+                </button>
+            </form>
+
+            <!-- KK -->
+            <form action="{% url 'set_language' %}" method="post" class="contents">
+                {% csrf_token %}
+                <input type="hidden" name="language" value="kk">
+                <input type="hidden" name="next" value="{{ request.get_full_path|translate_url:'kk' }}">
+                <button type="submit" role="menuitemradio" aria-checked="{% if CUR_LANG == 'kk' %}true{% else %}false{% endif %}" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm hover:bg-gray-100 focus:bg-gray-100 focus:outline-none {% if CUR_LANG == 'kk' %}bg-gray-100{% endif %}" data-lang-option="kk" tabindex="-1">
+                    <span>🇰🇿</span><span data-name>Қазақша</span>
+                    <span class="ml-auto opacity-60 {% if CUR_LANG != 'kk' %}hidden{% endif %}" data-check>✓</span>
+                </button>
+            </form>
+
+            <!-- EN -->
+            <form action="{% url 'set_language' %}" method="post" class="contents">
+                {% csrf_token %}
+                <input type="hidden" name="language" value="en">
+                <input type="hidden" name="next" value="{{ request.get_full_path|translate_url:'en' }}">
+                <button type="submit" role="menuitemradio" aria-checked="{% if CUR_LANG == 'en' %}true{% else %}false{% endif %}" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm hover:bg-gray-100 focus:bg-gray-100 focus:outline-none {% if CUR_LANG == 'en' %}bg-gray-100{% endif %}" data-lang-option="en" tabindex="-1">
+                    <span>🇬🇧</span><span data-name>English</span>
+                    <span class="ml-auto opacity-60 {% if CUR_LANG != 'en' %}hidden{% endif %}" data-check>✓</span>
+                </button>
+            </form>
+        </div>
+    </div>
+        {% feedback_button 'callback' 'split_call' %}
+    </section>
+<!-- END CTA_HEADER -->
+
+{% block contents %}
+{% endblock %}
+</main>
+{% include "contents/partials/_footer_nav.html" %}
+<!-- BEGIN NAV MODAL -->
+{% include "contents/partials/_main_nav.html" %}
+<!-- END NAV MODAL -->
+
+<!-- BEGIN DROPDOWN -->
+<script>
+    (() => {
+        function init(root) {
+            const btn   = root.querySelector('[data-lang-button]');
+            const menu  = root.querySelector('[data-lang-menu]');
+            const label = root.querySelector('[data-lang-label]');
+            const opts  = Array.from(root.querySelectorAll('[data-lang-option]'));
+            if (!btn || !menu || !label || !opts.length) return;
+
+            // Уникализируем связь aria-controls
+            if (!menu.id) menu.id = 'lang-menu-' + Math.random().toString(36).slice(2, 7);
+            btn.setAttribute('aria-controls', menu.id);
+
+            let open = false;
+            let value = localStorage.getItem('lang') || opts[0].dataset.langOption;
+
+            function updateUI() {
+                opts.forEach(o => {
+                    const sel = o.dataset.langOption === value;
+                    o.setAttribute('aria-checked', String(sel));
+                    o.querySelector('[data-check]')?.classList.toggle('hidden', !sel);
+                    o.classList.toggle('bg-gray-100', sel);
+                });
+                const cur = opts.find(o => o.dataset.langOption === value) || opts[0];
+                label.textContent = cur.querySelector('[data-name]')?.textContent?.trim() || value.toUpperCase();
+            }
+
+            function openMenu(focus = 'current') {
+                if (open) return;
+                open = true;
+                btn.setAttribute('aria-expanded', 'true');
+                menu.classList.remove('invisible', 'opacity-0', 'scale-95');
+                // фокус
+                const current = opts.find(o => o.dataset.langOption === value) || opts[0];
+                const target = focus === 'first' ? opts[0] : focus === 'last' ? opts.at(-1) : current;
+                target?.focus();
+            }
+
+            function closeMenu() {
+                if (!open) return;
+                open = false;
+                btn.setAttribute('aria-expanded', 'false');
+                menu.classList.add('invisible', 'opacity-0', 'scale-95');
+                btn.focus();
+            }
+
+            function select(val) {
+                value = val;
+                localStorage.setItem('lang', value);
+                updateUI();
+                root.dispatchEvent(new CustomEvent('langchange', { detail: { value } }));
+                closeMenu();
+            }
+
+            // Клики
+            btn.addEventListener('click', () => open ? closeMenu() : openMenu('current'));
+            opts.forEach(o => o.addEventListener('click', () => select(o.dataset.langOption)));
+
+            // Клик вне
+            document.addEventListener('click', (e) => {
+                if (!open) return;
+                if (!root.contains(e.target)) closeMenu();
+            });
+
+            // Клава на кнопке
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowDown') { e.preventDefault(); openMenu('first'); }
+                if (e.key === 'ArrowUp')   { e.preventDefault(); openMenu('last'); }
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open ? closeMenu() : openMenu('current'); }
+            });
+
+            // Клава в меню
+            menu.addEventListener('keydown', (e) => {
+                const i = opts.indexOf(document.activeElement);
+                if (e.key === 'Escape') { e.preventDefault(); closeMenu(); }
+                if (e.key === 'ArrowDown') { e.preventDefault(); (opts[i + 1] || opts[0]).focus(); }
+                if (e.key === 'ArrowUp')   { e.preventDefault(); (opts[i - 1] || opts.at(-1)).focus(); }
+                if (e.key === 'Home')      { e.preventDefault(); opts[0].focus(); }
+                if (e.key === 'End')       { e.preventDefault(); opts.at(-1).focus(); }
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const active = document.activeElement;
+                    if (opts.includes(active)) select(active.dataset.langOption);
+                }
+                if (e.key === 'Tab') closeMenu();
+            });
+
+            // Начальная синхронизация
+            updateUI();
+            // Старт: меню скрыто (invisible/opacity/scale в классе)
+        }
+
+        document.querySelectorAll('[data-lang-dropdown]').forEach(init);
+    })();
+</script>
+<!-- END DROPDOWN -->
+
+<!-- BEGIN Open Nav -->
+<script>
+    (() => {
+        const openBtn = document.getElementById('openNav');
+        const wrap = document.getElementById('offcanvasNav');
+        const panel = wrap?.querySelector('aside');
+        const overlay = document.getElementById('navOverlay');
+        const closeBtn = document.getElementById('closeNav');
+
+        if (!openBtn || !wrap || !panel || !overlay || !closeBtn) return;
+
+        let lastFocused = null;
+
+        function trapFocus(e) {
+            if (e.key !== 'Tab') return;
+            const focusables = panel.querySelectorAll('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            if (!focusables.length) return;
+            const first = focusables[0];
+            const last = focusables[focusables.length - 1];
+
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault(); last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault(); first.focus();
+            }
+        }
+
+        function openNav() {
+            lastFocused = document.activeElement;
+            wrap.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                overlay.classList.remove('opacity-0');
+                panel.classList.remove('-translate-x-full');
+            });
+            wrap.setAttribute('aria-hidden', 'false');
+            openBtn.setAttribute('aria-expanded', 'true');
+            document.documentElement.classList.add('overflow-hidden'); // блокируем скролл фона
+            setTimeout(() => {
+                const f = panel.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
+                f?.focus();
+            }, 10);
+            wrap.addEventListener('keydown', trapFocus);
+        }
+
+        function closeNav() {
+            overlay.classList.add('opacity-0');
+            panel.classList.add('-translate-x-full');
+            wrap.setAttribute('aria-hidden', 'true');
+            openBtn.setAttribute('aria-expanded', 'false');
+            document.documentElement.classList.remove('overflow-hidden');
+            wrap.removeEventListener('keydown', trapFocus);
+
+            // дожидаемся конца анимации, чтобы скрыть обертку
+            panel.addEventListener('transitionend', (e) => {
+                if (e.propertyName !== 'transform') return;
+                if (panel.classList.contains('-translate-x-full')) {
+                    wrap.classList.add('hidden');
+                    lastFocused && lastFocused.focus?.();
+                }
+            }, { once: true });
+        }
+
+        openBtn.addEventListener('click', openNav);
+        closeBtn.addEventListener('click', closeNav);
+        overlay.addEventListener('click', closeNav);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && wrap.getAttribute('aria-hidden') === 'false') {
+                closeNav();
+            }
+        });
+    })();
+</script>
+<!-- END Open Nav -->
+
+<!-- BEGIN drag and scroll -->
+<script>
+(() => {
+  // ---------- DRAG SCROLL + SAFE CLICK ----------
+  function setupDragScroll(slider) {
+    const wrap = slider.closest('.slider-wrap');
+    const cursor = wrap ? wrap.querySelector('.drag-cursor') : null;
+
+    const THRESHOLD = 6; // px: после этого считаем, что начался drag
+    let hadPointerDown = false;
+    let dragging = false;
+    let startX = 0, startY = 0, scrollLeft = 0;
+    let startAnchor = null;
+
+    // помогаем тач-устройствам
+    slider.style.touchAction = 'pan-x';
+
+    const onPointerDown = (e) => {
+      // только ЛКМ/тач/стилус
+      if (e.button !== undefined && e.button !== 0) return;
+      hadPointerDown = true;
+      dragging = false;
+      startX = e.clientX;
+      startY = e.clientY;
+      scrollLeft = slider.scrollLeft;
+      startAnchor = e.target.closest('a');
+      slider.dataset.dragging = '0';
+      slider.classList.add('select-none');
+      cursor?.classList.add('dragging');
+      slider.setPointerCapture?.(e.pointerId);
+      // ВАЖНО: не делаем preventDefault здесь — дадим шансы настоящему клику
+    };
+
+    const onPointerMove = (e) => {
+      if (cursor) {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top  = e.clientY + 'px';
+      }
+      if (!hadPointerDown) return;
+
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+
+      if (!dragging && Math.hypot(dx, dy) > THRESHOLD) {
+        dragging = true;
+        slider.dataset.dragging = '1';
+      }
+      if (dragging) {
+        slider.scrollLeft = scrollLeft - dx * 1.5; // скорость
+        e.preventDefault?.(); // блокируем выделение/призрачные клики только во время drag
+      }
+    };
+
+    const navigateIfTap = (e) => {
+      if (dragging) return;
+      const a = startAnchor || e.target.closest('a');
+      if (!a || !a.href) return;
+
+      // поддержка Cmd/Ctrl/target="_blank"
+      if (e.metaKey || e.ctrlKey || a.target === '_blank') {
+        window.open(a.href, '_blank');
+      } else {
+        window.location.assign(a.href);
+      }
+    };
+
+    const onPointerUp = (e) => {
+      // если это был «тап», делаем переход вручную
+      if (hadPointerDown) {
+        navigateIfTap(e);
+      }
+      // сброс
+      hadPointerDown = false;
+      dragging = false;
+      startAnchor = null;
+      slider.dataset.dragging = '0';
+      slider.classList.remove('select-none');
+      cursor?.classList.remove('dragging');
+      slider.releasePointerCapture?.(e.pointerId);
+    };
+
+    slider.addEventListener('pointerdown', onPointerDown);
+    slider.addEventListener('pointermove', onPointerMove, { passive: false });
+    window.addEventListener('pointerup', onPointerUp);
+
+    // Гасим нативный клик внутри ленты и решаем сами
+    slider.addEventListener('click', (e) => {
+      // если клика не предшествовал pointerdown (клавиатура/скринридер) — пропускаем
+      if (!hadPointerDown) return;
+      e.preventDefault();
+      e.stopPropagation();
+      // переход уже сделан в pointerup (чтобы не было двойного)
+    }, true);
+
+    // Показ/скрытие кастомного курсора
+    slider.addEventListener('pointerenter', () => {
+      if (cursor) { cursor.classList.remove('hidden'); slider.style.cursor = 'none'; }
+    });
+    slider.addEventListener('pointerleave', () => {
+      if (cursor) { cursor.classList.add('hidden'); slider.style.cursor = ''; }
+    });
+  }
+
+  // ---------- AUTOPLAY (как у тебя) ----------
+  function setupGalleryAutoplay(slider, { delay = 3000, resumeDelay = 2000 } = {}) {
+    let timer = null;
+    let paused = false;
+    let inView = true;
+
+    const cancel = () => { if (timer) { clearInterval(timer); timer = null; } };
+    const schedule = () => { cancel(); timer = setInterval(tick, delay); };
+
+    const findCenterIndex = () => {
+      const all = [...slider.querySelectorAll('.card-cert')];
+      const mid = slider.scrollLeft + slider.clientWidth / 2;
+      let best = 0, bestD = Infinity;
+      for (let i = 0; i < all.length; i++) {
+        const el = all[i];
+        const elMid = el.offsetLeft + el.clientWidth / 2;
+        const d = Math.abs(elMid - mid);
+        if (d < bestD) { bestD = d; best = i; }
+      }
+      return { all, index: best };
+    };
+
+    const centerOn = (el) => {
+      if (!el) return;
+      const left = el.offsetLeft - (slider.clientWidth - el.clientWidth) / 2;
+      slider.scrollTo({ left, behavior: 'smooth' });
+    };
+
+    const tick = () => {
+      if (paused || document.hidden || !inView || slider.dataset.dragging === '1') return;
+      const { all, index } = findCenterIndex();
+      if (!all.length) return;
+      const next = all[(index + 1) % all.length];
+      centerOn(next);
+    };
+
+    const pause = () => { paused = true; cancel(); };
+    const resume = () => { paused = false; schedule(); };
+
+    slider.addEventListener('mouseenter', pause);
+    slider.addEventListener('mouseleave', () => setTimeout(resume, resumeDelay));
+    slider.addEventListener('focusin', pause);
+    slider.addEventListener('focusout', () => setTimeout(resume, resumeDelay));
+    slider.addEventListener('pointerdown', pause);
+    window.addEventListener('pointerup', () => setTimeout(resume, resumeDelay));
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) pause(); else resume();
+    });
+
+    const io = new IntersectionObserver((entries) => {
+      inView = entries[0]?.isIntersecting ?? true;
+      if (inView) resume(); else pause();
+    }, { threshold: 0.3 });
+    io.observe(slider);
+
+    schedule();
+  }
+
+  // ---------- INFINITE CENTER GALLERY (как у тебя) ----------
+  function setupInfiniteCenterGallery(slider) {
+    const CARD_SELECTOR = '.card-cert';
+    const getItems = () => Array.from(slider.querySelectorAll(CARD_SELECTOR));
+
+    const centerOn = (el, instant = false) => {
+      if (!el) return;
+      const left = el.offsetLeft - (slider.clientWidth - el.clientWidth) / 2;
+      const prev = slider.style.scrollBehavior;
+      slider.style.scrollBehavior = instant ? 'auto' : '';
+      slider.scrollTo({ left });
+      slider.style.scrollBehavior = prev;
+    };
+
+    const indexRangeOfReal = () => {
+      const all = getItems();
+      const start = all.findIndex(x => !x.dataset.clone);
+      const end = all.length - 1 - [...all].reverse().findIndex(x => !x.dataset.clone);
+      return { all, start, end };
+    };
+
+    const nearestIndexToCenter = (all) => {
+      const mid = slider.scrollLeft + slider.clientWidth / 2;
+      let best = 0, bestD = Infinity;
+      for (let i = 0; i < all.length; i++) {
+        const el = all[i];
+        const elMid = el.offsetLeft + el.clientWidth / 2;
+        const d = Math.abs(elMid - mid);
+        if (d < bestD) { bestD = d; best = i; }
+      }
+      return best;
+    };
+
+    const markCenter = () => {
+      const all = getItems();
+      const i = nearestIndexToCenter(all);
+      all.forEach((el, idx) => el.classList.toggle('is-center', idx === i));
+    };
+
+    const real = getItems();
+    if (real.length < 2) {
+      requestAnimationFrame(markCenter);
+      return;
+    }
+
+    const after = document.createDocumentFragment();
+    real.forEach(el => {
+      const clone = el.cloneNode(true);
+      clone.dataset.clone = '1';
+      clone.setAttribute('aria-hidden', 'true');
+      after.appendChild(clone);
+    });
+    slider.appendChild(after);
+
+    const before = document.createDocumentFragment();
+    real.forEach(el => {
+      const clone = el.cloneNode(true);
+      clone.dataset.clone = '1';
+      clone.setAttribute('aria-hidden', 'true');
+      before.appendChild(clone);
+    });
+    slider.insertBefore(before, slider.firstElementChild);
+
+    const { all, start } = indexRangeOfReal();
+    centerOn(all[start], true);
+    requestAnimationFrame(markCenter);
+
+    let ticking = false;
+    slider.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const { all, start, end } = indexRangeOfReal();
+        const totalReal = end - start + 1;
+        const i = nearestIndexToCenter(all);
+
+        markCenter();
+
+        if (i < start) {
+          centerOn(all[i + totalReal], true);
+          markCenter();
+        } else if (i > end) {
+          centerOn(all[i - totalReal], true);
+          markCenter();
+        }
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
+  // ---------- INIT ----------
+  document.addEventListener('DOMContentLoaded', () => {
+    const cert = document.getElementById('card-cert-block'); // обычная лента
+    if (cert) setupDragScroll(cert);
+
+    const gallery = document.getElementById('card-gallery'); // центр-галерея
+    if (gallery) {
+      setupInfiniteCenterGallery(gallery);
+      setupDragScroll(gallery);
+      setupGalleryAutoplay(gallery, { delay: 3500, resumeDelay: 2000 });
+    }
+  });
+})();
+</script>
+<!-- END drag and scroll -->
+
+
+<!-- Модальное окно -->
+{% feedback_modal 'callback' %}
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+<script defer src="{% static 'dist/js/app.js' %}"></script>
+</body>
+</html>

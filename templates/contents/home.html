@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ page.meta_title }}
+{% endblock %}
+
+
+{% block contents %}
+{% load static %}
+{% load services_tags %}
+{% load team_tags %}
+{% load partners_tags %}
+{% load gallery_tags %}
+{% load social_tags %}
+{% load feedback_tags %}
+
+
+
+<!-- BEGIN HERO  -->
+<section id="hero" class="relative bg-black min-h-[100vh] w-full overflow-hidden">
+        <div class="text-center px-4">
+            <!-- логотип -->
+            <div class="flex justify-center">
+                <svg width="46" height="54" viewBox="0 0 46 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_173_141)">
+                        <path d="M30.3672 48.4005C30.342 48.2688 29.2998 46.2157 29.1525 45.9814C29.0627 45.8387 29.0303 45.4727 28.7536 45.7472C28.5955 45.9009 28.3008 48.4152 28.0852 49.0007C27.7222 49.9962 26.91 50.1828 27.6 51.4016C27.7294 51.6321 29.5083 53.2534 29.2927 53.4291C28.6386 53.4474 28.3403 52.8545 27.7437 52.5397C26.3206 51.7858 25.2066 52.1079 23.7223 52.5178C23.6038 51.16 25.1347 51.3723 26.0547 51.0502C26.1697 50.8819 24.6927 47.6759 24.4411 47.3026C23.708 46.2047 20.2759 42.5046 19.1511 42.0764C18.2239 41.7251 16.9337 42.0142 15.9527 41.6739C14.738 41.2493 14.605 40.2283 12.6644 40.0819C10.9034 39.9501 11.0364 40.2063 10.3212 41.7214L10.1559 42.8194C9.12812 42.684 8.39859 40.1185 8.51719 39.3426C8.58187 38.9217 9.26469 36.993 9.51984 36.6856C10.1056 35.9793 12.5134 33.8712 13.3112 33.2271C14.72 32.0999 18.418 30.4457 19.3056 29.2672C19.9956 28.3486 22.2812 23.2176 22.7269 21.955C23.5966 19.4737 23.7403 16.5275 24.6423 14.0243C26.928 11.2062 30.3061 8.74321 32.5198 5.94348C33.9142 4.18312 34.8486 1.81525 36.207 0L34.6797 5.486C34.9959 5.55188 35.1217 5.32131 35.3086 5.12369C36.1891 4.20142 36.6922 2.81803 37.7308 2.00922L36.4766 6.76693C36.818 7.15486 38.6489 5.05781 38.9005 4.8492C39.1233 4.66256 39.2509 4.44297 39.1719 4.8492C39.0713 5.37987 37.2097 8.81274 37.375 8.96279C37.9536 9.25191 40.8394 7.16218 40.9652 7.31589C41.0191 7.99661 38.737 10.3645 39.1719 10.7927L42.5859 10.0644C42.0002 11.2209 40.2464 11.7296 40.0703 12.9885H44.1133C44.275 12.9885 44.7637 13.3289 45.1016 13.1715C45.4322 13.4424 41.3641 14.511 41.0981 14.672C40.8681 14.8111 40.728 14.8587 40.7891 15.1808L45.2812 16.5532C44.0953 17.1241 42.665 16.9997 41.4108 17.373C41.1484 17.4498 41.0981 17.2741 41.152 17.7426C42.2158 18.1891 43.3586 18.4599 44.4295 18.8918C44.8177 19.0491 45.443 19.1845 45.6442 19.5761L40.6992 20.3044L35.6823 34.2262L28.2684 37.1065L27.8587 37.6884C29.8389 38.8851 32.0563 40.1368 33.9178 41.4909C37.3247 43.9722 42.8555 49.8608 45.5616 53.2388C45.7412 53.462 45.9102 53.6999 46.0072 53.9744C45.6083 54.3038 41.3425 50.9111 40.5303 50.6806C40.1745 50.9038 40.3686 50.9843 40.3758 51.1856C40.3937 51.859 40.3758 52.5983 40.6166 53.2388C40.2105 53.5645 38.7334 50.9221 38.1872 50.6806C37.9177 50.5635 37.9428 50.7574 37.8781 50.9075C37.7308 51.2552 37.5762 53.0741 37.2923 53.0558L35.1325 50.1316C34.7623 50.0511 34.8809 50.2817 34.8127 50.5305C34.6473 51.1381 34.6078 51.7968 34.5 52.4153C34.4569 52.6715 34.6689 52.9533 34.2377 52.8728L32.4372 49.7656C31.8011 49.6083 31.2225 52.7081 30.3744 52.6935C30.2019 51.4418 30.608 49.557 30.3744 48.3932L30.3672 48.4005Z" fill="url(#paint0_linear_173_141)"/>
+                        <path d="M5.48047 15.1881C5.64219 15.1734 6.10578 15.0453 6.37531 14.9978C6.66641 14.9429 7.22857 14.85 6.64844 14.6428L0.359375 12.1688C1.87953 12.1614 3.44281 12.7324 4.945 12.8092C5.31875 12.8275 5.4625 12.9153 5.39063 12.4469L0 9.69841C1.85078 10.3352 6.33938 10.3718 7.81641 11.3416C8.68969 11.9162 12.9627 15.931 13.6598 16.7911C14.1558 17.4059 18.0658 24.7401 18.2455 25.4281C18.382 25.9551 18.7055 29.0367 18.5222 29.3258L13.2466 32.6086L12.5781 32.7513V27.9021C12.5781 26.1235 11.0292 24.4583 10.5728 22.7162C9.93313 22.31 6.56578 23.8215 5.57031 23.5982L8.63578 20.7765L8.80109 20.1251L4.49219 21.5854C5.56313 20.5277 7.02219 19.8067 8.08953 18.7527C8.2836 18.5624 8.51 18.4306 8.44531 18.1086L2.15984 18.2879L6.43281 17.0582C6.61609 17.0106 7.19828 17.1021 7.00781 16.7362C6.81734 16.3702 2.46531 15.7444 1.69625 15.5504C1.39078 15.4735 1.17516 15.7334 1.26141 15.1808C2.62344 15.0819 4.14359 15.3125 5.48406 15.1808L5.48047 15.1881Z" fill="url(#paint1_linear_173_141)"/>
+                        <path d="M22.0441 45.4398C22.2237 45.5972 23.4923 47.0245 23.6181 47.2184C23.7439 47.4124 23.8984 47.6064 23.8913 47.8516C23.8877 47.9614 22.867 49.6375 22.77 49.7181C21.8212 50.5122 20.2652 49.3594 21.5589 51.9652C21.4152 52.1152 19.5823 50.9514 19.1223 50.8782C18.6623 50.805 16.8978 50.6769 16.4522 50.6952C16.0066 50.7135 15.3633 51.0978 14.9141 51.2332C14.6266 50.9258 16.2473 49.8022 16.5564 49.7071C17.5734 49.3923 18.8097 49.7034 19.8555 49.5863C21.5266 49.3997 21.8895 46.5707 21.3792 45.1946C21.6308 45.1616 21.8572 45.2788 22.0405 45.4361L22.0441 45.4398Z" fill="url(#paint2_linear_173_141)"/>
+                    </g>
+                    <defs>
+                        <linearGradient id="paint0_linear_173_141" x1="48.8125" y1="26.9984" x2="3.26437" y2="26.9984" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#8BCEFF"/>
+                            <stop offset="1" stop-color="#FFD5BB"/>
+                        </linearGradient>
+                        <linearGradient id="paint1_linear_173_141" x1="48.8125" y1="26.9984" x2="3.26437" y2="26.9984" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#8BCEFF"/>
+                            <stop offset="1" stop-color="#FFD5BB"/>
+                        </linearGradient>
+                        <linearGradient id="paint2_linear_173_141" x1="48.8125" y1="26.9984" x2="3.26437" y2="26.9984" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#8BCEFF"/>
+                            <stop offset="1" stop-color="#FFD5BB"/>
+                        </linearGradient>
+                        <clipPath id="clip0_173_141">
+                            <rect width="46" height="54" fill="white"/>
+                        </clipPath>
+                    </defs>
+                </svg>
+            </div>
+            <div id="hero-text">
+                <!-- заголовки -->
+                <div class="py-6">
+                    <h1 class="display-1 [ text-gradient-move ]">{{ page.hero_title|safe }}</h1>
+                    {% if page.hero_subtitle %}
+                      <h2 class="heading-2 [ py-2 ] [ text-gray-300 ]">{{ page.hero_subtitle|safe }}</h2>
+                    {% endif %}
+                </div>
+
+                <!-- кнопка -->
+                <div>
+                    {% feedback_button 'main' 'outline' %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Видео внизу героя -->
+        <div id="videoWrap" class="hero-video pt-[4rem] flex justify-center">
+            <video id="videoEl" class="hero-video__el rounded-xl" preload="metadata" playsinline muted
+                   poster="{% static 'dist/images/cover.jpg' %}"
+                   style="
+                   width:60%;
+                   margin:0 auto;">
+                <source src="{% static 'dist/video/main.webm' %}" type="video/webm" />
+            </video>
+        </div>
+
+{% if benefit_section %}
+<section id="egs" class="py-[6rem] bg-black">
+  <div class="grid grid-cols-12 [ pt-8 md:pt-[4rem] ]">
+    {% if benefit_section.title %}
+      {% load text_extras %}
+      <div class="lg:col-span-7 col-span-full">
+        <div class="pl-6 xl:pl-[6rem]">
+          <div class="progress-text absolute bottom-0 left-0" id="slogan">
+            <h2 class="display-4 progress-text__base font-medium">
+              {% for line in benefit_section.title|split_by:"|" %}
+                <span class="line md:block">{{ line }}</span>
+              {% endfor %}
+            </h2>
+            <h2 class="display-4 progress-text__fill font-medium" aria-hidden="true">
+              {% for line in benefit_section.title|split_by:"|" %}
+                <span class="line md:block">{{ line }}</span>
+              {% endfor %}
+            </h2>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% with items=benefit_section.items.all %}
+      {% if items %}
+        <div class="lg:col-span-5 col-span-full">
+          <ul class="flex flex-col gap-8 md:gap-[6rem] pl-6 xl:pl-[6rem] pt-12 lg:pt-0">
+            {% for it in items %}
+              <li class="flex flex-col gap-2">
+                {% if it.label %}
+                  <h5 class="display-2 font-medium [ text-gradient ] counter"
+                      data-end="{{ it.label }}" data-suffix="+">0</h5>
+                  {% if it.detail %}
+                    <span class="heading-2 font-bold [ text-amber-100 ]">{{ it.detail }}</span>
+                  {% endif %}
+                {% else %}
+                  {% if it.detail %}
+                    <h5 class="display-4 font-medium [ text-gradient ]">
+                      {{ it.detail|safe }}
+                    </h5>
+                  {% endif %}
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endwith %}
+  </div>
+</section>
+{% endif %}
+</section>
+<!-- END HERO  -->
+
+<!-- BEGIN SERVICES -->
+<section class="bg-stone-50 pt-[6rem] pb-[2rem]">
+    {% if page.education_title %}
+    <div class="px-6 lg:px-[3rem]">
+      <h2 class="display-3 font-medium [ text-black ]">
+          {{ page.education_title }}
+      </h2>
+    </div>
+    {% endif %}
+    {% services_cards %}
+</section>
+
+<!-- END SERVICES -->
+
+<!-- BEGIN TEAMS -->
+<section class="bg-stone-50 px-2 lg:pl-8 lg:pr-4">
+    <div class="bg-black rounded-[4rem] overflow-hidden">
+        <!-- BEGIN MEMBERS -->
+        {% team_block "team-core" %}
+        <!-- END MEMBERS -->
+
+        <!-- BEGIN PARTNERS -->
+        {% partners_block "partners-core" %}
+        <!-- END PARTNERS -->
+    </div>
+</section>
+<!-- BEGIN TEAMS -->
+
+<!-- BEGIN MISSION -->
+<section class="bg-stone-50 flex justify-center items-center py-[6rem] px-6 md:px-[3rem]">
+    <div class="text-center w-full lg:w-[65%]">
+        <h2 class="font-medium heading-1 leading-tight">{{ page.mission_text|safe }}</h2>
+    </div>
+</section>
+<!-- END MISSION -->
+
+<!-- BEGIN GALLERY -->
+{% gallery_block "core-gallery" %}
+<!-- END GALLERY -->
+
+<!-- BEGIN SOCIAL -->
+<section class="bg-stone-50">
+        <div class="py-[6rem]">
+            <ul class="flex justify-center items-center gap-8 md:gap-[6rem]">
+                {% social_block "social-core" %}
+            </ul>
+        </div>
+</section>
+<!-- END SOCIAL -->
+
+<!-- BEGIN Team block -->
+<script>
+    (function () {
+        const items   = document.querySelectorAll('.team-item');
+        const imgWrap = document.getElementById('team-member-image');
+        const imgEl   = imgWrap.querySelector('img');
+
+        const descEl  = document.getElementById('team-member-description');
+        const nameEls = document.querySelectorAll('.team-member-name');
+        const postEl  = document.getElementById('team-member-post');
+
+        const btnPrev = document.getElementById('team-prev');
+        const btnNext = document.getElementById('team-next');
+
+        let currentIndex = 0;
+        let isSwitching  = false; // защита от быстрого многократного клика
+
+        function fillTexts({ description, name, post }) {
+            descEl.textContent = description;
+            nameEls.forEach(el => el.textContent = name);
+            postEl.textContent = post;
+        }
+
+        function showMember(index) {
+            if (isSwitching || items.length === 0) return;
+
+            if (index < 0) index = items.length - 1;
+            if (index >= items.length) index = 0;
+            currentIndex = index;
+
+            // активное состояние
+            const activeItem = items[currentIndex];
+            items.forEach(el => el.classList.remove('active'));
+            activeItem.classList.add('active');
+
+            const { image, description, name, post } = activeItem.dataset;
+
+            isSwitching = true;
+
+            // предзагрузка изображения
+            const nextImg = new Image();
+            nextImg.src = image;
+
+            nextImg.onload = () => {
+                // сначала обновляем тексты, затем подменяем изображение — без “белого кадра”
+                fillTexts({ description, name, post });
+                imgEl.src = nextImg.src;
+                isSwitching = false;
+            };
+
+            // если картинка не загрузилась — обновим хотя бы тексты
+            nextImg.onerror = () => {
+                fillTexts({ description, name, post });
+                isSwitching = false;
+            };
+        }
+
+        // клики по карточкам
+        items.forEach((item, index) => {
+            item.addEventListener('click', () => showMember(index));
+        });
+
+        // стрелки
+        btnPrev && btnPrev.addEventListener('click', () => showMember(currentIndex - 1));
+        btnNext && btnNext.addEventListener('click', () => showMember(currentIndex + 1));
+
+        // стартовое состояние (первый активен)
+        if (items.length > 0) {
+            showMember(0);
+        }
+    })();
+</script>
+<!-- END Team block -->
+
+{% endblock %}

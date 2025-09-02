@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% load feedback_tags %}
+{% load social_tags %}
+
+{% block title %} {{ _("Blog") }} {% endblock %}
+
+<!-- THEM COLOR SETTINGS -->
+{% block header_bg %} bg-white {% endblock %}
+{% block header_bg_btn %} bg-gray-800 text-white {% endblock %}
+<!-- THEM COLOR SETTINGS -->
+
+{% block contents %}
+
+<section class="flex flex-col relative z-0 bg-white ">
+    <div class="pb-8 gap-4 pt-12 px-6">
+            <div>
+                <h1 class="text-6xl font-medium pb-8">{{ _("Blog") }}</h1>
+                {% if posts %}
+                <div class="grid grid-cols-12 gap-6">
+                  {% for p in posts %}
+                    <article class="article-card">
+                      {% if p.image %}
+                        <a href="{{ p.get_absolute_url }}">
+                            <div class="relative aspect-video overflow-hidden rounded-md">
+                                <img    src="{{ p.image.url }}"
+                                        alt="{{ p.title }}"
+                                        class="absolute inset-0 w-full h-full object-cover object-center"
+                                        loading="lazy" decoding="async" draggable="false">
+                            </div>
+                            <div class="pt-2 h-[4rem]">
+                                <h2 class="font-bold">{{ p.title }}</h2>
+                            </div>
+                        </a>
+                      {% endif %}
+                      </article>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+</section>
+
+{% endblock %}

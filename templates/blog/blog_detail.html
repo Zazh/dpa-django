@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% load feedback_tags %}
+{% load social_tags %}
+{% load markup %}
+
+{% block title %} {{ _("Blog") }} {% endblock %}
+
+<!-- THEM COLOR SETTINGS -->
+{% block header_bg %} bg-white {% endblock %}
+{% block header_bg_btn %} bg-gray-800 text-white {% endblock %}
+<!-- THEM COLOR SETTINGS -->
+
+{% block contents %}
+<section class="grid grid-cols-12 gap-4 px-6 max-w-screen-lg mx-auto pb-12">
+    <div class="col-span-12 lg:col-span-9">
+            <div class="py-8">
+                <h1 class="text-4xl font-medium pb-4">{{ object.title }}</h1>
+                {% if object.subtitle %}
+                  <h2 class="text-m leading-tight text-gray-700 pt-2">{{ object.subtitle }}</h2>
+                {% endif %}
+            </div>
+            <div>
+                <ul>
+                    {% if object.author %}
+                    <li class="font-bold text-sm"><span class="pr-2">Автор:</span> <span class="text-blue-500">{{ object.author }}</span></li>
+                    {% endif %}
+                    <li class="font-bold text-sm pt-1"><time datetime="{{ object.published_at|date:'c' }}" class="text-gray-700">{{ object.published_at|date:"d E Y" }}</time></li>
+                </ul>
+            </div>
+            <div class="py-8">
+                {% if object.tags %}
+                <ul class="flex flex-wrap gap-2">
+                  {% for t in object.tags %}
+                    <li>
+                      <span class="px-2 py-1 border border-gray-300 hover:bg-gray-100 text-blue-500 font-medium text-sm rounded-md">#{{ t }}</span>
+                    </li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div>
+              {% if object.image %}
+                <div class="relative aspect-video overflow-hidden">
+                    <img    src="{{ object.image.url }}"
+                            alt="{{ object.title }}"
+                            class="absolute inset-0 w-full h-full object-cover object-center"
+                            loading="lazy" decoding="async" draggable="false">
+                </div>
+              {% endif %}
+            </div>
+            <div class="py-8 blog-content">
+                {{ object.body_md|markdown_safe }}
+            </div>
+    </div>
+</section>
+{% endblock %}

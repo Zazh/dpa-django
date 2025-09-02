@@ -1,0 +1,32 @@
+{# templates/contents/partials/_services_blocks_for.html #}
+{% for pl in placements %}
+  {% with block=pl.block %}
+    <section class="my-16">
+      {% if block.title %}
+        <h2 class="text-3xl font-bold">{{ block.title }}</h2>
+      {% endif %}
+      {% if block.description %}
+        <p class="mt-2 text-gray-600">{{ block.description }}</p>
+      {% endif %}
+
+      <div class="grid gap-6 mt-8 md:grid-cols-3">
+        {% with items=block.items_cache|default:block.items.all %}
+          {% for it in items %}
+            <article class="rounded-2xl border p-6">
+              {% if it.icon_svg %}<div class="mb-3 [ &>svg ]:h-8 [ &>svg ]:w-8 [ &>svg ]:fill-current">{{ it.icon_svg|safe }}</div>{% endif %}
+              <h3 class="text-lg font-semibold">{{ it.name }}</h3>
+              {% if it.description %}<p class="text-gray-600 mt-1">{{ it.description }}</p>{% endif %}
+              {% if it.tags %}
+                <ul class="flex flex-wrap gap-2 mt-3">
+                  {% for tag in it.tags %}
+                    <li class="text-xs px-2 py-1 rounded-full border">{{ tag }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </article>
+          {% endfor %}
+        {% endwith %}
+      </div>
+    </section>
+  {% endwith %}
+{% endfor %}

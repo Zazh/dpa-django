@@ -1,0 +1,15 @@
+{# templates/contents/partials/_social_block.html #}
+{% if block %}
+  {% for it in block.items.all %}
+    <li>
+      <a target="_blank" href="{{ it.url }}"
+         {% if new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+         aria-label="{{ it.label|default_if_none:'' }}"
+         title="{{ it.label }}">
+        <span class="{{ icon_class|default:'[&>svg]:h-10 [&>svg]:w-10 md:[&>svg]:h-12 md:[&>svg]:w-12 [&>svg]:fill-current text-black hover:text-gray-500' }}">
+          {{ it.svg_code|safe }}
+        </span>
+      </a>
+    </li>
+  {% endfor %}
+{% endif %}

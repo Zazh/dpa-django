@@ -1,0 +1,37 @@
+{% load i18n %}
+{% if page %}
+  <div class="space-y-2">
+    {% if page.footer_text %}
+      <div class="text-sm text-gray-400">{{ page.footer_text|linebreaksbr }}</div>
+    {% endif %}
+
+    <div class="flex flex-col gap-1 text-sm">
+      {% if page.phone_number %}
+        <div>
+          {% if page.phone_label %}<span class="text-gray-400">{{ page.phone_label }}: </span>{% endif %}
+          <a href="tel:{{ page.phone_number|urlencode }}" class="hover:underline">{{ page.phone_number }}</a>
+        </div>
+      {% endif %}
+
+      {% if page.email %}
+        <div>
+          {% if page.email_label %}<span class="text-gray-400">{{ page.email_label }}: </span>{% endif %}
+          <a href="mailto:{{ page.email }}" class="hover:underline">{{ page.email }}</a>
+        </div>
+      {% endif %}
+
+      {% if page.address_text %}
+        <div>
+          {% if page.address_label %}<span class="text-gray-400">{{ page.address_label }}: </span>{% endif %}
+          {% if page.address_url %}
+            <a href="{{ page.address_url }}" target="_blank" rel="noopener" class="hover:underline">
+              {{ page.address_text }}
+            </a>
+          {% else %}
+            <span>{{ page.address_text }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}

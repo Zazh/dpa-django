@@ -1,0 +1,24 @@
+<div id="offcanvasNav" class="fixed inset-0 z-[60] hidden" aria-hidden="true">
+    <!-- Клик по оверлею закрывает меню -->
+    <div id="navOverlay" class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300"></div>
+
+    <!-- Левая панель -->
+    <aside class="absolute left-0 top-0 h-full w-[min(90vw,22rem)] max-w-[20rem] -translate-x-full bg-white shadow-xl transition-transform duration-300 will-change-transform"
+           role="region" aria-label="menu">
+        <div class="flex items-center p-4">
+            <button id="closeNav" type="button" class="p-2 rounded hover:bg-gray-100 focus:outline-none focus:ring"
+                    aria-label="Закрыть меню">
+                <!-- Иконка крестика -->
+                <svg class="size-8" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+
+        <nav class="p-4">
+            <ul class="[ font-bold uppercase px-4 flex gap-1 flex-col ]  [ main_nav ]">
+                 {% include "contents/partials/_nav_items.html" with menu_slug='main' %}
+            </ul>
+        </nav>
+    </aside>
+</div>

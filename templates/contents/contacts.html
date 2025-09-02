@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% load feedback_tags %}
+{% load social_tags %}
+
+{% block title %}{{ page.meta_title|default:page.title }}{% endblock %}
+
+<!-- THEM COLOR SETTINGS -->
+{% block header_bg %} bg-white {% endblock %}
+{% block header_bg_btn %} text-white bg-black {% endblock %}
+<!-- THEM COLOR SETTINGS -->
+
+{% block contents %}
+<section class="bg-white">
+    <div class="pb-[6rem] gap-4 pt-[8rem] px-6">
+        <div>
+            {% if page.title %}
+            <h1 class="text-6xl font-medium pb-[3rem]">{{ page.title }}</h1>
+            {% endif %}
+            <div class="flex flex-wrap">
+                <div class="w-full lg:w-1/2">
+                  {% if page.subtitle %}
+                    <h2 class="text-2xl">{{ page.subtitle }}</h2>
+                  {% endif %}
+                </div>
+                <div class="w-full lg:w-1/2 pt-[4rem] lg:pt-0">
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                        {% if page.email %}
+                        <li>
+                            {% if page.email_label %}
+                          <h3 class="pb-6 text-gray-500 font-medium">{{ page.email_label }}</h3>
+                          {% endif %}
+                            <div class="flex flex-col gap-2 text-black">
+                                <a href="mailto:info@aerialsolutions.kz" class="hover:text-blue-600 font-medium">info@aerialsolutions.kz</a>
+                            </div>
+                        </li>
+                        {% endif %}
+
+                        {% if page.phone_number %}
+                          <li>
+                            {% if page.phone_label %}
+                              <h3 class="pb-6 text-gray-500 font-medium">{{ page.phone_label }}</h3>
+                            {% endif %}
+                              <div class="flex flex-col gap-2 text-black">
+                                  <a href="tel:{{ page.phone_number|urlencode }}" class="hover:text-blue-600">{{ page.phone_number }}</a>
+                              </div>
+                          </li>
+                        {% endif %}
+
+                      {% if page.address_text %}
+                        <li>
+                            {% if page.address_label %}
+                              <h3 class="pb-6 text-gray-500 font-medium">{{ page.address_label }}</h3>
+                            {% endif %}
+                            <div class="flex flex-col gap-2 text-black">
+                                {% if page.address_url %}
+                                <a class="hover:text-blue-600 font-medium" href="{{ page.address_url }}">{{ page.address_text }}</a>
+                                {% else %}
+                                  <div class="text-xl font-semibold">{{ page.address_text }}</div>
+                                {% endif %}
+                            </div>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="w-full lg:w-1/2 pt-[4rem] ml-auto">
+                    <ul class="flex justify-between md:justify-start items-center gap-8 md:gap-[3rem]">
+                        {% social_block "social-core" %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

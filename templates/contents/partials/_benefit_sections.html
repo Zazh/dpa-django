@@ -1,0 +1,67 @@
+{# sections: queryset BenefitSection (prefetch items) #}
+{% if sections %}
+<section id="egs" class="py-[6rem] bg-black">
+{% for s in sections %}
+    <div class="grid grid-cols-12 [ pt-8 md:pt-[4rem] ]">
+        {% if s.title %}
+        <div class="lg:col-span-7 col-span-full">
+            <div class="pl-6 xl:pl-[6rem]">
+                <div class="progress-text absolute bottom-0 left-0" id="slogan">
+                  {% if s.title %}
+
+                    {% load text_extras %}
+
+                    <!-- базовый серый слой -->
+                    <h2 class="display-4 progress-text__base font-medium">
+                      {% for line in s.title|split_by:"|" %}
+                      <span class="line md:block">{{ line }}</span>
+                      {% endfor %}
+                    </h2>
+
+                    <!-- верхний заливочный слой -->
+                    <h2 class="display-4 progress-text__fill font-medium" aria-hidden="true">
+                      {% for line in s.title|split_by:"|" %}
+                        <span class="line md:block">{{ line }}</span>
+                      {% endfor %}
+                    </h2>
+
+                  {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% with items=s.items.all %}
+        {% if items %}
+        <div class="lg:col-span-5 col-span-full">
+            <ul class="flex flex-col gap-8 md:gap-[6rem] pl-6 xl:pl-[6rem] pt-12 lg:pt-0">
+            {% for it in items %}
+              <li class="flex flex-col gap-2">
+                {% if it.label %}
+                  {# есть label → показываем счётчик #}
+                  <h5 class="display-2 font-medium [ text-gradient ] counter"
+                      data-end="{{ it.label }}" data-suffix="+">0</h5>
+                  {% if it.detail %}
+                    <span class="heading-2 font-bold [ text-amber-100 ]">{{ it.detail }}</span>
+                  {% endif %}
+                {% else %}
+                  {# нет label → detail в h5-блоке #}
+                  {% if it.detail %}
+                    <h5 class="display-4 font-medium [ text-gradient ]">
+                      {{ it.detail|safe }}
+                    </h5>
+                  {% endif %}
+                {% endif %}
+              </li>
+            {% endfor %}
+
+            </ul>
+        </div>
+        {% else %}
+        <p class="flex flex-col gap-2"><span class="heading-2 font-bold [ text-amber-100 ]">this block is empty</span></p>
+        {% endif %}
+        {% endwith %}
+    </div>
+{% endfor %}
+</section>
+{% endif %}

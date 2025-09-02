@@ -1,0 +1,19 @@
+{# templates/contents/partials/_gallery_block.html #}
+{% load static %}
+{% if block %}
+<section class="bg-stone-50 slider-wrap">
+  <div id="card-gallery" class="w-full gap-3 md:gap-6 flex overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory px-[10%] [scroll-padding-inline:10%]">
+    {% for it in block.items.all %}
+      <div class="card-cert w-full flex-shrink-0 snap-center [scroll-snap-stop:always] ">
+        <div class="relative bg-gray-100 aspect-video overflow-hidden rounded-2xl">
+          <img src="{{ it.image.url }}"
+               alt="{{ it.alt }}"
+               class="absolute inset-0 w-full h-full object-cover object-center"
+               loading="lazy" decoding="async" draggable="false">
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="pointer-events-none fixed z-50 hidden drag-cursor"></div>
+</section>
+{% endif %}

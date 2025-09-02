@@ -1,0 +1,31 @@
+{# templates/contents/partials/_partners_block.html #}
+{% if block %}
+<!-- BEGIN PARTNERS -->
+<div class="flex items-center border-t border-gray-700 py-4">
+  <div class="hidden lg:block">
+      <div class="w-[13rem]">
+          {% if block.title %}
+          <p class="text-white pl-[4rem] font-bold text-xl uppercase">{{ block.title|safe }}</p>
+          {% endif %}
+      </div>
+  </div>
+  <div class="partners-wrap px-12 overflow-hidden">
+      <div class="partners-track text-white py-6 gap-12 flex">
+        {% with logos=block.logos.all %}
+          <ul class="partners-row flex gap-12 items-center shrink-0">
+            {% for logo in logos %}
+              <li>{{ logo.svg_code|safe }}</li>
+            {% endfor %}
+          </ul>
+
+          <ul class="partners-row flex gap-12 items-center shrink-0" aria-hidden="true">
+            {% for logo in logos %}
+              <li>{{ logo.svg_code|safe }}</li>
+            {% endfor %}
+          </ul>
+        {% endwith %}
+      </div>
+  </div>
+</div>
+<!-- END PARTNERS -->
+{% endif %}

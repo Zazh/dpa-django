@@ -1,0 +1,8 @@
+<button class="[ modal-btn ] bg-lime-300 hover:bg-lime-400 text-black px-6 py-5 rounded-full font-bold text-sm"
+        data-title="{{ modal_title|escape }}"
+        data-action="{% if action %}{{ action.slug }}{% endif %}"
+        data-submit="{{ submit_label|escape }}"
+        data-name-label="{{ name_label|escape }}"
+        data-phone-label="{{ phone_label|escape }}">
+  {{ label }}
+</button>

@@ -1,0 +1,314 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% load fleet_tags %}
+{% load faq_tags %}
+{% load feedback_tags %}
+
+{% block title %}{{ page.meta_title|default:page.title }}{% endblock %}
+
+<!-- THEM COLOR SETTINGS -->
+{% block header_bg %} bg-stone-50 {% endblock %}
+{% block header_bg_btn %} bg-gray-800 text-white {% endblock %}
+<!-- THEM COLOR SETTINGS -->
+
+{% block contents %}
+<section class="bg-stone-50 relative">
+    <!-- BEGIN BG -->
+    <div class="absolute left-0 right-0 top-[6rem] overflow-hidden z-0">
+        <div class="flex justify-between items-start">
+            <svg class="w-[90%] aspect-16/20 mx-auto" viewBox="0 0 1338 1142" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1142 0C1235.55 93.5506 1299.26 212.741 1325.07 342.5C1350.88 472.258 1337.63 606.756 1287 728.986C1236.38 851.215 1150.64 955.687 1040.63 1029.19C930.63 1102.69 801.301 1141.92 669 1141.92C536.7 1141.92 407.371 1102.69 297.367 1029.19C187.363 955.687 101.625 851.216 50.9962 728.986C0.366966 606.756 -12.8799 472.258 12.9306 342.5C38.7412 212.741 102.45 93.5506 196 0L669 473L1142 0Z" fill="url(#paint0_linear_394_79)" fill-opacity="0.1" style="mix-blend-mode:plus-darker"/>
+                <defs>
+                    <linearGradient id="paint0_linear_394_79" x1="669" y1="1419" x2="669" y2="-473" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#EDF4FF"/>
+                        <stop offset="1" stop-color="#0056D2"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+    </div>
+    <!-- END BG -->
+
+    <div class="text-center relative z-50">
+        <div class="flex justify-center pb-6">
+            <svg class="size-[4.5rem]" viewBox="0 0 46 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_173_141)">
+                    <path d="M30.3672 48.4005C30.342 48.2688 29.2998 46.2157 29.1525 45.9814C29.0627 45.8387 29.0303 45.4727 28.7536 45.7472C28.5955 45.9009 28.3008 48.4152 28.0852 49.0007C27.7222 49.9962 26.91 50.1828 27.6 51.4016C27.7294 51.6321 29.5083 53.2534 29.2927 53.4291C28.6386 53.4474 28.3403 52.8545 27.7437 52.5397C26.3206 51.7858 25.2066 52.1079 23.7223 52.5178C23.6038 51.16 25.1347 51.3723 26.0547 51.0502C26.1697 50.8819 24.6927 47.6759 24.4411 47.3026C23.708 46.2047 20.2759 42.5046 19.1511 42.0764C18.2239 41.7251 16.9337 42.0142 15.9527 41.6739C14.738 41.2493 14.605 40.2283 12.6644 40.0819C10.9034 39.9501 11.0364 40.2063 10.3212 41.7214L10.1559 42.8194C9.12812 42.684 8.39859 40.1185 8.51719 39.3426C8.58187 38.9217 9.26469 36.993 9.51984 36.6856C10.1056 35.9793 12.5134 33.8712 13.3112 33.2271C14.72 32.0999 18.418 30.4457 19.3056 29.2672C19.9956 28.3486 22.2812 23.2176 22.7269 21.955C23.5966 19.4737 23.7403 16.5275 24.6423 14.0243C26.928 11.2062 30.3061 8.74321 32.5198 5.94348C33.9142 4.18312 34.8486 1.81525 36.207 0L34.6797 5.486C34.9959 5.55188 35.1217 5.32131 35.3086 5.12369C36.1891 4.20142 36.6922 2.81803 37.7308 2.00922L36.4766 6.76693C36.818 7.15486 38.6489 5.05781 38.9005 4.8492C39.1233 4.66256 39.2509 4.44297 39.1719 4.8492C39.0713 5.37987 37.2097 8.81274 37.375 8.96279C37.9536 9.25191 40.8394 7.16218 40.9652 7.31589C41.0191 7.99661 38.737 10.3645 39.1719 10.7927L42.5859 10.0644C42.0002 11.2209 40.2464 11.7296 40.0703 12.9885H44.1133C44.275 12.9885 44.7637 13.3289 45.1016 13.1715C45.4322 13.4424 41.3641 14.511 41.0981 14.672C40.8681 14.8111 40.728 14.8587 40.7891 15.1808L45.2812 16.5532C44.0953 17.1241 42.665 16.9997 41.4108 17.373C41.1484 17.4498 41.0981 17.2741 41.152 17.7426C42.2158 18.1891 43.3586 18.4599 44.4295 18.8918C44.8177 19.0491 45.443 19.1845 45.6442 19.5761L40.6992 20.3044L35.6823 34.2262L28.2684 37.1065L27.8587 37.6884C29.8389 38.8851 32.0563 40.1368 33.9178 41.4909C37.3247 43.9722 42.8555 49.8608 45.5616 53.2388C45.7412 53.462 45.9102 53.6999 46.0072 53.9744C45.6083 54.3038 41.3425 50.9111 40.5303 50.6806C40.1745 50.9038 40.3686 50.9843 40.3758 51.1856C40.3937 51.859 40.3758 52.5983 40.6166 53.2388C40.2105 53.5645 38.7334 50.9221 38.1872 50.6806C37.9177 50.5635 37.9428 50.7574 37.8781 50.9075C37.7308 51.2552 37.5762 53.0741 37.2923 53.0558L35.1325 50.1316C34.7623 50.0511 34.8809 50.2817 34.8127 50.5305C34.6473 51.1381 34.6078 51.7968 34.5 52.4153C34.4569 52.6715 34.6689 52.9533 34.2377 52.8728L32.4372 49.7656C31.8011 49.6083 31.2225 52.7081 30.3744 52.6935C30.2019 51.4418 30.608 49.557 30.3744 48.3932L30.3672 48.4005Z" fill="url(#paint0_linear_173_141)"/>
+                    <path d="M5.48047 15.1881C5.64219 15.1734 6.10578 15.0453 6.37531 14.9978C6.66641 14.9429 7.22857 14.85 6.64844 14.6428L0.359375 12.1688C1.87953 12.1614 3.44281 12.7324 4.945 12.8092C5.31875 12.8275 5.4625 12.9153 5.39063 12.4469L0 9.69841C1.85078 10.3352 6.33938 10.3718 7.81641 11.3416C8.68969 11.9162 12.9627 15.931 13.6598 16.7911C14.1558 17.4059 18.0658 24.7401 18.2455 25.4281C18.382 25.9551 18.7055 29.0367 18.5222 29.3258L13.2466 32.6086L12.5781 32.7513V27.9021C12.5781 26.1235 11.0292 24.4583 10.5728 22.7162C9.93313 22.31 6.56578 23.8215 5.57031 23.5982L8.63578 20.7765L8.80109 20.1251L4.49219 21.5854C5.56313 20.5277 7.02219 19.8067 8.08953 18.7527C8.2836 18.5624 8.51 18.4306 8.44531 18.1086L2.15984 18.2879L6.43281 17.0582C6.61609 17.0106 7.19828 17.1021 7.00781 16.7362C6.81734 16.3702 2.46531 15.7444 1.69625 15.5504C1.39078 15.4735 1.17516 15.7334 1.26141 15.1808C2.62344 15.0819 4.14359 15.3125 5.48406 15.1808L5.48047 15.1881Z" fill="url(#paint1_linear_173_141)"/>
+                    <path d="M22.0441 45.4398C22.2237 45.5972 23.4923 47.0245 23.6181 47.2184C23.7439 47.4124 23.8984 47.6064 23.8913 47.8516C23.8877 47.9614 22.867 49.6375 22.77 49.7181C21.8212 50.5122 20.2652 49.3594 21.5589 51.9652C21.4152 52.1152 19.5823 50.9514 19.1223 50.8782C18.6623 50.805 16.8978 50.6769 16.4522 50.6952C16.0066 50.7135 15.3633 51.0978 14.9141 51.2332C14.6266 50.9258 16.2473 49.8022 16.5564 49.7071C17.5734 49.3923 18.8097 49.7034 19.8555 49.5863C21.5266 49.3997 21.8895 46.5707 21.3792 45.1946C21.6308 45.1616 21.8572 45.2788 22.0405 45.4361L22.0441 45.4398Z" fill="url(#paint2_linear_173_141)"/>
+                </g>
+                <defs>
+                    <linearGradient id="paint0_linear_173_141" x1="48.8125" y1="26.9984" x2="3.26437" y2="26.9984" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#FF9A5C"/>
+                        <stop offset="1" stop-color="#0093FF"/>
+                    </linearGradient>
+                    <linearGradient id="paint1_linear_173_141" x1="48.8125" y1="26.9984" x2="3.26437" y2="26.9984" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#FF9A5C"/>
+                        <stop offset="1" stop-color="#0093FF"/>
+                    </linearGradient>
+                    <linearGradient id="paint2_linear_173_141" x1="48.8125" y1="26.9984" x2="3.26437" y2="26.9984" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#FF9A5C"/>
+                        <stop offset="1" stop-color="#0093FF"/>
+                    </linearGradient>
+                    <clipPath id="clip0_173_141">
+                        <rect width="46" height="54" fill="white"/>
+                    </clipPath>
+                </defs>
+            </svg>
+        </div>
+        <h1 class="text-5xl md:text-6xl font-bold">{{ page.title }}</h1>
+        {% if page.subtitle %}
+            <h2 class="md:text-xl pt-6 pb-8 font-medium leading-tight text-gray-600">{{ page.subtitle|safe }}</h2>
+        {% endif %}
+
+        {% feedback_button 'defailt' 'solid' %}
+
+    </div>
+
+    {% include "contents/partials/_service_slider.html" with page=page only %}
+
+    {% if page.benefits.all %}
+    <div class="py-12 relative z-50">
+        <ul class="flex justify-center flex-wrap gap-12">
+            {% for be in page.benefits.all %}
+            <li class="flex justify-center items-center flex-col gap-2">
+                <span class="text-3xl font-bold">{{ be.value }}</span>
+                <span class="font-medium text-gray-600">{{ be.name }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+</section>
+
+<section class="bg-stone-50">
+<div class=" py-6 md:py-12 lg:py-6 px-4 lg:px-4 flex relative z-0 [ bg-transparent md:bg-black lg:bg-transparent ]  ]">
+        <div class="w-full max-w-screen-xl mx-auto flex flex-col md:flex-row gap-4 md:gap-8 lg:gap-4 xl:gap-8 justify-center">
+            <div class="flex bg-black/90 rounded-[4rem] [ aspect-[16/13] md:aspect-auto lg:aspect-[16/13] ] py-4 lg:py-0 lg:pt-0 w-full md:w-1/2">
+                {% if page.cta_title or page.cta_descr or page.cta_button_label %}
+                <div class="text-white lg:p-12 [ p-8 md:p-0 xl:p-12 ] flex flex-col">
+                    <div class="mt-auto">
+                        <h2 class="xl:text-5xl text-4xl font-medium">
+                            {{ page.cta_title|safe }}
+                        </h2>
+                        {% if page.cta_descr %}
+                            <p class="xl:text-xl text-gray-400 py-6">{{ page.cta_descr }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="flex gap-4">
+                        {% feedback_button 'default' 'lime' %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="flex bg-black/90 rounded-[4rem] [ aspect-[16/13] md:aspect-auto lg:aspect-[16/13] ] [ py-4 md:py-0 xl:py-4 ] lg:pt-0 w-full md:w-1/2">
+                {% if page.advantages.all %}
+                <ul class="text-white [ p-6 md:p-0 lg:p-6 ] flex flex-col justify-end w-full gap-6 md:gap-4">
+                    {% for ad in page.advantages.all %}
+                    <li class="bg-white h-full max-h-[6rem] px-4 xl:px-6 py-2 xl:py-0 rounded-[2rem] w-full flex items-center gap-4 xl:gap-6">
+                        <span>
+                            {% if ad.icon_svg %}
+                                <span class="size-14 md:size-12 xl:size-14 bg-black/90 flex justify-center items-center rounded-full">
+                                {{ ad.icon_svg|safe }}
+                                </span>
+                            {% endif %}
+                        </span>
+                        <span class="text-black text-sm xl:text-lg font-bold leading-tight lg:leading-tight">{{ ad.text|safe }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+</div>
+</section>
+
+{% if page.program_items.all %}
+<section class="px-4 md:px-8 pt-12 bg-stone-50">
+<div class="text-center ">
+    <h2 class="text-4xl font-bold ">{{ page.program_title|safe }}</h2>
+</div>
+<div class="accordion max-w-screen-lg [  mt-12 mb-8 ]" data-acc-group data-acc-single="true">
+    {% for it in page.program_items.all %}
+    <div class="item">
+        <div class="item-header [ md:py-6 py-4 md:px-8 px-6 ] [ acc-trigger ]"
+                    id="acc-{{ it.anchor_id }}"
+                    aria-expanded="false"
+                    aria-controls="panel-{{ it.anchor_id }}">
+            <div class="flex flex-wrap flex-col md:flex-row gap-2 md:gap-12 md:items-center">
+                <h1 class="item-header__title text-2xl">{{ it.title }}</h1>
+                <span class="flex gap-2 items-center">
+                    <span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 2C14.9706 2 19 6.02944 19 11C19 15.9706 14.9706 20 10 20C5.02944 20 1 15.9706 1 11C1 6.02944 5.02944 2 10 2ZM10.0001 6C9.48725 6 9.06459 6.38605 9.00683 6.88338L9.0001 7V10.9863C8.99718 11.2034 9.06447 11.4212 9.20197 11.6028L9.2929 11.7071L11.3983 13.8125C11.7889 14.2031 12.422 14.2031 12.8125 13.8125C13.1731 13.452 13.2008 12.8849 12.8957 12.4925L12.8125 12.3983L11.0001 10.5859V7C11.0001 6.44772 10.5524 6 10.0001 6ZM16.0008 0.606001C17.252 1.3298 18.3599 2.27272 19.2724 3.38217C19.6232 3.80873 19.5618 4.43891 19.1352 4.78972C18.7087 5.14054 18.0785 5.07914 17.7277 4.65258C16.9663 3.72685 16.0421 2.94042 14.9993 2.33721C14.5212 2.06066 14.3579 1.44894 14.6344 0.970881C14.911 0.492811 15.5227 0.329451 16.0008 0.606001ZM5.36563 0.970881C5.64218 1.44894 5.47882 2.06066 5.00075 2.33721C3.95799 2.94042 3.03373 3.72685 2.27237 4.65258C1.92156 5.07914 1.29138 5.14054 0.86482 4.78972C0.43827 4.43891 0.37687 3.80873 0.72769 3.38217C1.64015 2.27272 2.74805 1.3298 3.9993 0.606001C4.47736 0.329451 5.08909 0.492821 5.36563 0.970881Z" fill="#636363"/>
+                        </svg>
+                    </span>
+                    {% if it.time %}
+                        <span class="font-medium">{{ it.time }}</span>
+                    {% endif %}
+                </span>
+            </div>
+            <div>
+                <span class="item-header__icon [ bg-black text-white ]">
+                    <svg class="size-4" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 1H13M13 1V12M13 1L2.05263 12" stroke="white" stroke-width="2"/>
+                    </svg>
+                </span>
+            </div>
+        </div>
+        <div class="item-body [ md:pb-6 pb-4 md:px-8 px-6 ]" id="panel-1" role="region" aria-labelledby="acc-{{ it.anchor_id }}">
+            <div class="pb-4">
+                {% if it.subtitle %}
+                <h2 class="font-bold text-lg">{{ it.subtitle }}</h2>
+                {% endif %}
+                <ul class="py-4">
+                    {% if it.bullets %}
+                        {% for li in it.bullets %}
+                        <li class="flex flex-nowrap gap-3 mb-3">
+                            <span class="w-5 inline-flex">
+                                <span class="size-5 mt-1 inline-flex items-center justify-center bg-blue-600 rounded-full">
+                                    <svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.5625 4.93748L5.00006 7.5L9.04151 0.5" stroke="white" stroke-width="2"/>
+                                    </svg>
+                                </span>
+                            </span>
+                            <span class="font-medium text-gray-600">{{ li }}</span>
+                        </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+                <div class="flex flex-col md:flex-row gap-2">
+                    {% if it.images %}
+                        {% for img in it.images %}
+                        <div class="relative flex justify-center rounded-md overflow-hidden object-cover [ md:max-w-[15rem] w-full aspect-video bg-gray-500 ]">
+                            <img    src="{{ img.url }}"
+                                    alt="{{ it.title }}"
+                                    class="absolute inset-0 w-full h-full object-cover object-center"
+                                    loading="lazy" decoding="async" draggable="false">
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="text-center pb-6">
+    {% feedback_button 'defailt' 'solid' %}
+</div>
+</section>
+{% endif %}
+
+{% fleet_block "fleet-core" %}
+
+{% faq_block "faq-core" %}
+
+<!-- BEGIN SIMPLE SLIDER -->
+<script>
+    (() => {
+        function initSlider(slider) {
+            const list = JSON.parse(slider.getAttribute('data-images') || '[]');
+            const img  = slider.querySelector('[data-slider-img]');
+            const prev = slider.querySelector('[data-slider-prev]');
+            const next = slider.querySelector('[data-slider-next]');
+            if (!img || !prev || !next || !list.length) return;
+
+            let i = 0, busy = false;
+
+            // если стартовый src не первый в массиве — выровняем индекс
+            const curSrc = img.getAttribute('src') || '';
+            const found = list.findIndex(x => curSrc.endsWith(x.src) || curSrc.includes(x.src));
+            if (found >= 0) i = found;
+
+            function show(newIndex) {
+                if (busy) return;
+                busy = true;
+                const idx = (newIndex + list.length) % list.length;
+                const item = list[idx];
+                const pre = new Image();
+                pre.onload = () => {
+                    // плавно скрыть, сменить src, показать
+                    img.addEventListener('transitionend', function onFadeOut(e) {
+                        if (e.propertyName !== 'opacity') return;
+                        img.removeEventListener('transitionend', onFadeOut);
+                        img.src = item.src;
+                        img.alt = item.alt || '';
+                        requestAnimationFrame(() => {
+                            img.classList.remove('opacity-0');
+                            img.addEventListener('transitionend', () => { busy = false; i = idx; }, { once:true });
+                        });
+                    }, { once:true });
+                    img.classList.add('opacity-0');
+                };
+                pre.onerror = () => { busy = false; }; // на всякий случай
+                pre.src = item.src;
+            }
+
+            prev.addEventListener('click', () => show(i - 1));
+            next.addEventListener('click', () => show(i + 1));
+
+            // клавиатура
+            slider.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft')  show(i - 1);
+                if (e.key === 'ArrowRight') show(i + 1);
+            });
+
+            // свайп (очень простой)
+            let sx = 0, dx = 0;
+            slider.addEventListener('touchstart', e => { sx = e.changedTouches[0].clientX; dx = 0; }, { passive:true });
+            slider.addEventListener('touchmove',  e => { dx = e.changedTouches[0].clientX - sx; }, { passive:true });
+            slider.addEventListener('touchend',   () => {
+                if (Math.abs(dx) > 40) (dx < 0 ? show(i + 1) : show(i - 1));
+            });
+        }
+
+        document.querySelectorAll('[data-slider]').forEach(initSlider);
+    })();
+</script>
+<!-- END SIMPLE SLIDER -->
+
+<!-- BEGIN ACCORDION -->
+<script>
+    (() => {
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.acc-trigger');
+            if (!btn) return;
+
+            const item  = btn.closest('.item');
+            const group = item.closest('[data-acc-group]');
+            const single = group?.getAttribute('data-acc-single') === 'true';
+
+            const panelId = btn.getAttribute('aria-controls');
+            const panel = document.getElementById(panelId);
+            if (!panel) return;
+
+            const willOpen = !item.classList.contains('active');
+
+            // Если в группе только один открыт — закрываем остальных
+            if (single && willOpen && group) {
+                group.querySelectorAll('.item.active').forEach(other => {
+                    if (other !== item) {
+                        other.classList.remove('active');
+                        const obtn = other.querySelector('.acc-trigger');
+                        const opanel = document.getElementById(obtn?.getAttribute('aria-controls'));
+                        obtn?.setAttribute('aria-expanded', 'false');
+                        opanel?.setAttribute('hidden', '');
+                        opanel?.setAttribute('aria-hidden', 'true');
+                    }
+                });
+            }
+
+            // Переключаем текущий
+            item.classList.toggle('active', willOpen);
+            btn.setAttribute('aria-expanded', String(willOpen));
+            panel.toggleAttribute('hidden', !willOpen);
+            panel.setAttribute('aria-hidden', String(!willOpen));
+        });
+    })();
+</script>
+<!-- END ACCORDION -->
+
+{% endblock %}
