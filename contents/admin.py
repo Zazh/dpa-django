@@ -111,7 +111,7 @@ class AboutPageAdmin(TabbedTranslationAdmin):
     list_display = ("__str__",)
     inlines = []
     fieldsets = (
-        (_("Main"), {"fields": ("title", "subtitle", "mission_text", "image", "education_title")}),
+        (_("Main"), {"fields": ("title", "subtitle", "mission_text", "education_title")}),
         (_("Meta"), {"fields": ("meta_title", "meta_description")}),
     )
 

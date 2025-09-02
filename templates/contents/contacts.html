@@ -3,7 +3,9 @@
 {% load feedback_tags %}
 {% load social_tags %}
 
-{% block title %}{{ page.meta_title|default:page.title }}{% endblock %}
+{% block title %}
+  {{ page.meta_title }}
+{% endblock %}
 
 <!-- THEM COLOR SETTINGS -->
 {% block header_bg %} bg-white {% endblock %}

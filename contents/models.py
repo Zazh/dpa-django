@@ -67,7 +67,6 @@ class AboutPage(models.Model):
     subtitle = models.TextField(_("Subtitle"), blank=True)
     education_title = models.CharField(_("Education title"), max_length=300, blank=True)
     mission_text = models.CharField(_("Mission text"), max_length=300, blank=True)
-    image = models.ImageField(_("Image"), upload_to="about/", blank=True)
 
     meta_title = models.CharField(_("Meta title"), max_length=255, blank=True)
     meta_description = models.TextField(_("Meta description"), blank=True)
@@ -553,10 +552,8 @@ class ContactPage(models.Model):
     address_text = models.CharField(_("Address text"), max_length=300, blank=True, default="")
     address_url = models.URLField(_("Address URL (map)"), max_length=500, blank=True)
 
-    # ТЕКСТ ДЛЯ ФУТЕРА — будет подтягиваться везде из этой же записи
     footer_text = models.TextField(_("Footer text"), blank=True, default="")
 
-    # SEO (опционально)
     meta_title = models.CharField(_("Meta title"), max_length=255, blank=True)
     meta_description = models.TextField(_("Meta description"), blank=True)
 

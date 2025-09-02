@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
-from .models import BlogPost
+from .models import BlogPost, BlogSettings
+
 
 @admin.register(BlogPost)
 class BlogPostAdmin(TabbedTranslationAdmin):
@@ -34,3 +35,8 @@ class BlogPostAdmin(TabbedTranslationAdmin):
         lang = getattr(settings, "MODELTRANSLATION_DEFAULT_LANGUAGE", None) \
                or getattr(settings, "LANGUAGE_CODE", "ru").split("-")[0]
         return {"slug": (f"title_{lang}",)}
+
+@admin.register(BlogSettings)
+class BlogSettingsAdmin(TabbedTranslationAdmin):
+    list_display = ("__str__",)
+    fields = ("title", "meta_title", "meta_description", "meta_keywords")

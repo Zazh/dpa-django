@@ -3,7 +3,13 @@
 {% load feedback_tags %}
 {% load social_tags %}
 
-{% block title %} {{ _("Blog") }} {% endblock %}
+{% block title %}
+  {{ page.meta_title|default:page.title|default:_("Blog") }}
+{% endblock %}
+
+{% block meta_description %}{{ page.meta_description|default:"" }}{% endblock %}
+{% block meta_keywords %}{{ page.meta_keywords|default:"" }}{% endblock %}
+
 
 <!-- THEM COLOR SETTINGS -->
 {% block header_bg %} bg-white {% endblock %}
@@ -15,7 +21,9 @@
 <section class="flex flex-col relative z-0 bg-white ">
     <div class="pb-8 gap-4 pt-12 px-6">
             <div>
-                <h1 class="text-6xl font-medium pb-8">{{ _("Blog") }}</h1>
+                <h1 class="text-6xl font-medium pb-8">
+  {{ page.title|default:_("Blog") }}
+                </h1>
                 {% if posts %}
                 <div class="grid grid-cols-12 gap-6">
                   {% for p in posts %}

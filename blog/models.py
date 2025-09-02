@@ -3,6 +3,19 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 
+class BlogSettings(models.Model):
+    title = models.CharField(_("Page title"), max_length=200, blank=True)
+    meta_title = models.CharField(_("Meta title"), max_length=255, blank=True)
+    meta_description = models.TextField(_("Meta description"), blank=True)
+    meta_keywords = models.TextField(_("Meta keywords (comma-separated)"), blank=True)
+
+    class Meta:
+        verbose_name = _("Blog settings")
+        verbose_name_plural = _("Blog settings")
+
+    def __str__(self):
+        return self.title or "Blog"
+
 class BlogPost(models.Model):
     slug = models.SlugField(_("Slug"), unique=True)
 

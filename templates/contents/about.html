@@ -63,11 +63,15 @@
 
         <!-- Видео внизу героя -->
         <div id="videoWrap" class="hero-video pt-[4rem] flex justify-center">
-            {% if page.image %}
-            <img id="videoEl" class="hero-video__el rounded-xl" src="{{ page.image.url }}" alt="" style="width:60%; margin:0 auto;">
-            {% endif %}
+            <video id="videoEl" class="hero-video__el rounded-xl" preload="metadata" playsinline muted
+                   poster="{% static 'dist/images/cover_dpa.jpg' %}"
+                   style="
+                   width:60%;
+                   margin:0 auto;">
+                <source src="{% static 'dist/video/about.webm' %}" type="video/webm" />
+            </video>
         </div>
-  </section>
+</section>
 <!-- END HERO  -->
 {% if benefit_section %}
 <section id="egs" class="py-[6rem] bg-black">
@@ -156,6 +160,19 @@
 </section>
 <!-- END MISSION -->
 
+<!-- BEGIN GALLERY -->
+{% gallery_block "about-gallery" %}
+<!-- END GALLERY -->
+
+<!-- BEGIN SOCIAL -->
+<section class="bg-stone-50">
+        <div class="py-[6rem]">
+            <ul class="flex justify-center items-center gap-8 md:gap-[6rem]">
+                {% social_block "social-core" %}
+            </ul>
+        </div>
+</section>
+<!-- END SOCIAL -->
 
 <!-- BEGIN drag and scroll -->
 <script>
