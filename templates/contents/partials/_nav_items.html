@@ -6,7 +6,7 @@
     {% menu_is_active it as active %}
     <li>
       <a href="{{ href }}"
-         style="{% if active %} color:#000; {% else %}" class=" tracking-wider text-black/50 hover:text-black {% endif %}"
+         class="tracking-wider {% if active %} active {% else %} text-black/50 hover:text-black {% endif %}"
          aria-current="{% if active %}page{% endif %}"
          {% if it.open_in_new_tab or href|slice:":4" == "http" %}target="_blank" rel="noopener noreferrer"{% endif %}>
         {{ it.title }}

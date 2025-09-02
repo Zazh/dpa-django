@@ -1959,15 +1959,19 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 }
-.main_nav li a{
-    letter-spacing: 0.05em;
-    color: rgb(0 0 0 / 0.5);
-}
-.main_nav li a:hover{
+.main_nav > li > .active{
     --tw-text-opacity: 1;
     color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }
-.footer_nav li a{
+.main_nav > li > a{
+    letter-spacing: 0.05em;
+    color: rgb(0 0 0 / 0.5);
+}
+.main_nav > li > a:hover{
+    --tw-text-opacity: 1;
+    color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+}
+.footer_nav> li > .active{
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-left: 1rem;
@@ -1975,9 +1979,28 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
-.footer_nav li a:hover{
+.footer_nav> li > .active:hover{
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+.footer_nav> li > a{
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(156 163 175 / var(--tw-text-opacity, 1));
+}
+.footer_nav> li > a:hover{
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+@media (min-width: 768px){
+
+    .footer_nav> li > a{
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
 }
 
 .blog-content p{
