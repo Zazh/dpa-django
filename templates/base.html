@@ -204,36 +204,41 @@
 
         function trapFocus(e) {
             if (e.key !== 'Tab') return;
-            const focusables = panel.querySelectorAll('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            const focusables = panel.querySelectorAll(
+                'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
             if (!focusables.length) return;
             const first = focusables[0];
             const last = focusables[focusables.length - 1];
-
-            if (e.shiftKey && document.activeElement === first) {
-                e.preventDefault(); last.focus();
-            } else if (!e.shiftKey && document.activeElement === last) {
-                e.preventDefault(); first.focus();
-            }
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
         }
 
         function openNav() {
             lastFocused = document.activeElement;
-            wrap.classList.remove('hidden');
+            // показать контейнер и разрешить клики
+            wrap.classList.remove('hidden', 'pointer-events-none');
+            overlay.classList.remove('pointer-events-none');
+
+            // чтобы transition сработал
             requestAnimationFrame(() => {
                 overlay.classList.remove('opacity-0');
                 panel.classList.remove('-translate-x-full');
             });
+
             wrap.setAttribute('aria-hidden', 'false');
             openBtn.setAttribute('aria-expanded', 'true');
-            document.documentElement.classList.add('overflow-hidden'); // блокируем скролл фона
+            document.documentElement.classList.add('overflow-hidden');
+
             setTimeout(() => {
-                const f = panel.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
-                f?.focus();
+                panel.querySelector('a, button, [tabindex]:not([tabindex="-1"])')?.focus();
             }, 10);
+
             wrap.addEventListener('keydown', trapFocus);
         }
 
         function closeNav() {
+            // начать анимацию скрытия
             overlay.classList.add('opacity-0');
             panel.classList.add('-translate-x-full');
             wrap.setAttribute('aria-hidden', 'true');
@@ -241,14 +246,26 @@
             document.documentElement.classList.remove('overflow-hidden');
             wrap.removeEventListener('keydown', trapFocus);
 
-            // дожидаемся конца анимации, чтобы скрыть обертку
-            panel.addEventListener('transitionend', (e) => {
+            // запретить клики по overlay сразу (он может быть на 100% экрана)
+            overlay.classList.add('pointer-events-none');
+
+            // ф-ция финального скрытия
+            const done = () => {
+                wrap.classList.add('hidden', 'pointer-events-none');
+                // на всякий случай уберём listener (если таймаут сработал первым)
+                panel.removeEventListener('transitionend', onEnd, { once: true });
+                lastFocused && lastFocused.focus?.();
+            };
+
+            // слушаем окончания transform (но оно может не прийти) + таймаут-фолбэк
+            const onEnd = (e) => {
                 if (e.propertyName !== 'transform') return;
-                if (panel.classList.contains('-translate-x-full')) {
-                    wrap.classList.add('hidden');
-                    lastFocused && lastFocused.focus?.();
-                }
-            }, { once: true });
+                if (panel.classList.contains('-translate-x-full')) done();
+            };
+            panel.addEventListener('transitionend', onEnd, { once: true });
+
+            // надёжный фолбэк (подгоните 350 под вашу длительность transition)
+            setTimeout(done, 350);
         }
 
         openBtn.addEventListener('click', openNav);
