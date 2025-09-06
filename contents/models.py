@@ -321,7 +321,7 @@ class ServicePage(models.Model):
     title = models.CharField(_("Офер"), max_length=200)
     subtitle = models.TextField(_("УТП"), blank=True)
 
-    program_title = models.CharField(_("Program title"), max_length=200, blank=True, default="Program")
+    program_title = models.CharField(_("Program title"), max_length=200, blank=True)
 
     # флаги/порядок для карточек
     show = models.BooleanField(_("Show in cards"), default=True, db_index=True)
