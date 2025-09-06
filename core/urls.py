@@ -1,4 +1,3 @@
-# project/urls.py
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
@@ -16,7 +15,7 @@ urlpatterns += i18n_patterns(
     path("feedback/", include("feedback.urls")),
     path("blog/", include("blog.urls", namespace="blog")),
 
-    prefix_default_language=False,             # ← корень "/" = язык по умолчанию
+    prefix_default_language=True,             # ← корень "/" = язык по умолчанию
 )
 
 if settings.DEBUG:
