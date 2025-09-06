@@ -64,7 +64,7 @@ class MenuItemTR(TranslationOptions):
 #--- services ----
 @register(ServicePage)
 class ServicePageTR(TranslationOptions):
-    fields = ("title", "subtitle", "meta_title", "meta_description", "program_title", "card_tags_text", "card_title_text", "card_description_text", "cta_title", "cta_descr")
+    fields = ("title", "subtitle", "meta_title", "meta_description", "program_title", "card_tags_text", "card_title_text", "card_description_text", "cta_title", "cta_descr",)
 
 @register(ServiceBenefit)
 class ServiceBenefitTR(TranslationOptions):
@@ -76,7 +76,7 @@ class ServiceAdvantageTR(TranslationOptions):
 
 @register(ServiceProgramItem)
 class ServiceProgramItemTR(TranslationOptions):
-    fields = ("title", "subtitle", "list_text")
+    fields = ("title", "subtitle", "list_text", "time")
 
 @register(FleetBlock)
 class FleetBlockTR(TranslationOptions):

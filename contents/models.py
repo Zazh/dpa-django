@@ -323,11 +323,11 @@ class ServicePage(models.Model):
 
     program_title = models.CharField(_("Program title"), max_length=200, blank=True, default="Program")
 
-    # NEW: флаги/порядок для карточек
+    # флаги/порядок для карточек
     show = models.BooleanField(_("Show in cards"), default=True, db_index=True)
     services_order = models.PositiveIntegerField(default=0, db_index=True)
 
-    # NEW: поля карточки
+    # поля карточки
     card_icon_svg = models.TextField(_("Card icon SVG"), blank=True)
     card_tags_text = models.CharField(_("Card tags (comma-separated)"), max_length=300, blank=True)
     card_title_text = models.CharField(_("Card title"), max_length=300, blank=True)
