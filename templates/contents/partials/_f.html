@@ -1,0 +1,130 @@
+{% load static %}
+{% if block %}
+<section class="pt-12 bg-stone-50">
+  {% if block.title %}
+  <div class="text-center">
+    <h2 class="text-4xl font-bold">{{ block.title }}</h2>
+  </div>
+  {% endif %}
+
+  <div class="slider-wrap">
+    {# ОДИН скролл-трек на все карточки #}
+    <div class="w-full gap-6 flex overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar
+                p-[3rem] [scroll-padding-left:3rem] [scroll-padding-right:1.5rem]">
+
+      {% for it in block.items.all %}
+      <article class="w-full max-w-[20rem] shadow-[0_18px_34px_0_rgba(99,99,99,0.04)]
+                      hover:shadow-[0_18px_24px_0_rgba(99,99,99,0.1)]
+                      hover:scale-105 transition-transform bg-white
+                      aspect-[16/14] rounded-[2rem] flex-shrink-0 snap-start
+                      relative overflow-hidden duration-300">
+
+        {# Клик по карточке откроет модалку #}
+        <button type="button"
+                class="absolute inset-0 z-10"
+                aria-label="Подробнее"
+                data-fleet-open="fleet-modal-{{ it.id }}"></button>
+
+        <div class="flex flex-col h-full justify-between relative z-0">
+          <div class="flex justify-center relative pt-4">
+            <div class="relative flex justify-center items-center overflow-hidden object-cover w-full aspect-[16/9] m-auto">
+              <img src="{{ it.image_src }}" alt="{{ it.name }}"
+                   class="absolute inset-0 w-full h-full object-cover object-center"
+                   loading="lazy" decoding="async" draggable="false">
+            </div>
+          </div>
+          <div class="pl-6 pr-4 pb-6">
+            <h3 class="font-bold text-xl">{{ it.name }}</h3>
+            {% if it.subtitle %}
+              <p class="mt-1 text-gray-600 text-sm font-bold leading-tight">{{ it.subtitle }}</p>
+            {% endif %}
+          </div>
+          <div class="absolute right-4 bottom-4">
+            <span class="size-14 bg-black/90 flex justify-center items-center rounded-full">
+              <svg class="size-4" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 1H13M13 1V12M13 1L2.05263 12" stroke="white" stroke-width="2"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      {# Модалка (уникальный id + маркер data-fleet-modal) #}
+      <div id="fleet-modal-{{ it.id }}" class="fixed inset-0 z-[70] hidden"
+           role="dialog" aria-modal="true" aria-labelledby="fleet-modal-title-{{ it.id }}"
+           data-fleet-modal>
+        <div class="absolute inset-0 bg-black/60" data-fleet-close></div>
+
+        <div class="relative mx-auto my-10 w-full max-w-screen-sm rounded-2xl bg-white shadow-xl overflow-hidden">
+          <div class="grid gap-0">
+            <div class="bg-black/5">
+              <img src="{{ it.image_src }}" alt="{{ it.name }}" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <h4 id="fleet-modal-title-{{ it.id }}" class="text-2xl font-bold">{{ it.name }}</h4>
+                  {% if it.subtitle %}<p class="text-gray-600 mt-1">{{ it.subtitle }}</p>{% endif %}
+                </div>
+                <button type="button" class="rounded-full p-2 hover:bg-gray-100" aria-label="Закрыть" data-fleet-close>
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </div>
+
+              {% if it.description %}
+                <p class="mt-4 text-gray-800">{{ it.description|linebreaks }}</p>
+              {% endif %}
+
+              {% if it.specs.all %}
+              <div class="mt-6">
+                {% if block.character_label %}
+                  <h5 class="font-semibold mb-2">{{ block.character_label }}</h5>
+                {% endif %}
+                <dl class="grid grid-cols-[auto,1fr] gap-x-4 gap-y-2">
+                  {% for sp in it.specs.all %}
+                    <dt class="text-gray-500">{{ sp.key }}</dt>
+                    <dd class="text-gray-900 font-medium">{{ sp.value }}</dd>
+                  {% endfor %}
+                </dl>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="pointer-events-none fixed z-50 hidden drag-cursor"></div>
+  </div>
+</section>
+
+<script>
+(() => {
+  const html = document.documentElement;
+  const showModal = (m) => { if (!m) return; m.classList.remove('hidden'); html.classList.add('overflow-hidden'); };
+  const hideModal = (m) => { if (!m) return; m.classList.add('hidden'); html.classList.remove('overflow-hidden'); };
+
+  document.addEventListener('click', (e) => {
+    const opener = e.target.closest('[data-fleet-open]');
+    if (opener) {
+      const id = opener.getAttribute('data-fleet-open');
+      showModal(document.getElementById(id));
+      return; // не даём событию «провалиться» дальше
+    }
+    if (e.target.closest('[data-fleet-close]')) {
+      const modal = e.target.closest('[data-fleet-modal]');
+      hideModal(modal);
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('[data-fleet-modal]:not(.hidden)').forEach(hideModal);
+    }
+  });
+})();
+</script>
+{% endif %}

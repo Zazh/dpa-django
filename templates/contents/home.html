@@ -106,7 +106,7 @@
                   <h5 class="display-2 font-medium [ text-gradient ] counter"
                       data-end="{{ it.label }}" data-suffix="+">0</h5>
                   {% if it.detail %}
-                    <span class="heading-2 font-bold [ text-amber-100 ]">{{ it.detail }}</span>
+                    <span class="heading-2 font-bold [ text-amber-100 ]">{{ it.detail|safe }}</span>
                   {% endif %}
                 {% else %}
                   {% if it.detail %}
