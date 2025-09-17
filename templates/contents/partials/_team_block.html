@@ -4,14 +4,14 @@
 {% if block %}
 
 <!-- BEGIN MEMBERS -->
-<div class="p-8 lg:p-[4rem]">
+<div class="p-8 lg:px-[4rem] lg:pb-[4rem]">
   <div class="grid grid-cols-12">
-      <div class="col-span-12 md:col-span-5 xl:col-span-4">
+      <div class="col-span-12 [ lg:pt-[2rem] ] md:col-span-5 xl:col-span-4">
           <div id="team-member-image" class="rounded-[2rem] overflow-hidden">
               <img src="dist/images/team-avatar.jpg" alt="" class="w-full h-full object-cover">
           </div>
       </div>
-      <div id="team-detail" class="col-span-12 md:col-span-7 xl:col-span-4 xl:col-start-6 text-white">
+      <div id="team-detail" class="col-span-12 [ lg:pt-[2rem] ] md:col-span-7 xl:col-span-4 xl:col-start-6 text-white">
           <div class="mt-10 md:mt-0 lg:mt-10 min-h-[16rem] px-0 md:px-12 xl:px-0">
               <p class="text-lg font-medium leading-tight text-white" id="team-member-description">
                   <span class="text-white"></span>
@@ -46,19 +46,19 @@
                   data-description="{{ m.description|escape }}"
                   data-name="{{ m.name|escape }}"
                   data-post="{{ m.post|escape }}">
-                <span class="size-[3.5rem] rounded-full inline-block overflow-hidden">
+                  <span class="team-member-avatar">
                     {% if m.photo %}
                       <img src="{{ m.photo.url }}" alt="{{ m.name }}" class="object-cover w-full h-full">
                     {% else %}
                       <img src="{{ TEAM_PH }}" alt="{{ m.name }}" class="object-cover w-full h-full">
                     {% endif %}
-                </span>
-                <span class="team-member team-member-name">{{ m.name }}</span>
-                <span class="team-open">
-                  <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 1H13M13 1V12M13 1L2.05263 12" stroke="white" stroke-width="2"/>
-                  </svg>
-                </span>
+                  </span>
+                  <span class="team-member team-member-name">{{ m.name }}</span>
+                  <span class="team-open">
+                      <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 1H13M13 1V12M13 1L2.05263 12" stroke="white" stroke-width="2"/>
+                      </svg>
+                  </span>
               </li>
             {% endfor %}
           </ul>
